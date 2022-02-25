@@ -5,7 +5,7 @@ import { useContext } from 'react';
 import FeedbackContext from './context/FeedbackContext';
 
 function FeedbackForm() {
-    const {addFeedback, modifyFeedback, editFeedbackData} = useContext(FeedbackContext)
+    const {modifyFeedback, editFeedbackData, insertFeedbackData, updateFeedbackData} = useContext(FeedbackContext)
     const [data, setData] = useState({review: "", message: "", isDisabled: true, rating: "10"});
     useEffect(()=>{
         if(editFeedbackData.edit) {
@@ -28,9 +28,9 @@ function FeedbackForm() {
     function handleFormSubmit(event) {
         event.preventDefault();
         if(editFeedbackData.edit) {
-            modifyFeedback({text: data.review, rating: data.rating});
+            updateFeedbackData({text: data.review, rating: parseInt(data.rating)});
         } else {
-            addFeedback({rating: parseInt(data.rating), text: data.review});
+            insertFeedbackData({rating: parseInt(data.rating), text: data.review});
         }
         setData(prevData => ({...prevData, review: "", isDisabled: true, rating: "10"}));
     }

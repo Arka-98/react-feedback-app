@@ -6,10 +6,10 @@ import PropTypes from 'prop-types'
 import Card from "./shared/Card";
 
 function FeedbackItem({item}) {
-    const {deleteFeedback, getFeedback} = useContext(FeedbackContext)
+    const {deleteFeedbackData, getFeedback} = useContext(FeedbackContext);
     function handleCloseIconClick(event) {
         event.preventDefault();
-        deleteFeedback(item.id);
+        deleteFeedbackData(item.id);
     }
 
     function handleEditIconClick(event) {
