@@ -26,7 +26,7 @@ export const FeedbackProvider = ({children}) => {
     }
     const deleteFeedbackData = async (id) => {
         try {
-            const response = await fetch(`http://localhost:5000/feedback/${id}`, {method: "DELETE"})
+            const response = await fetch(`/feedback/${id}`, {method: "DELETE"})
             if(!response.ok) {
                 throw new Error(response.statusText)
             }
@@ -37,7 +37,7 @@ export const FeedbackProvider = ({children}) => {
     }
     const insertFeedbackData = async(feedbackItem) => {
         try {
-            const response = await fetch("http://localhost:5000/feedback", {
+            const response = await fetch("/feedback", {
                 method: "POST",
                 headers: {"Content-type": "Application/json"},
                 body: JSON.stringify(feedbackItem)
@@ -53,7 +53,7 @@ export const FeedbackProvider = ({children}) => {
     }
     const updateFeedbackData = async (feedbackItem) => {
         try {
-            const response = await fetch(`http://localhost:5000/feedback/${editFeedbackData.item.id}`, {
+            const response = await fetch(`/feedback/${editFeedbackData.item.id}`, {
                 method: "PUT",
                 headers: {"Content-type": "Application/json"},
                 body: JSON.stringify(feedbackItem)
