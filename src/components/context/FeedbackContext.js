@@ -7,13 +7,16 @@ export const FeedbackProvider = ({children}) => {
     const [isLoading, setIsLoading] = useState(true);
     const [editFeedbackData, setEditFeedbackData] = useState({item: {}, edit: false});
     const [feedbackData, setFeedbackData] = useState([]);
+
+    const baseApiUrl = process.env.REACT_APP_API_URL
+
     useEffect(() => {
         fetchFeedbackData();
     }, [])
 
     const fetchFeedbackData = async () => {
         try {
-            const response = await fetch("/feedback?_sort=id&_order=desc");
+            const response = await fetch(baseApiUrl+"/feedback?_sort=id&_order=desc");
             if(!response.ok) {
                 throw new Error(response.statusText)
             }
@@ -26,7 +29,7 @@ export const FeedbackProvider = ({children}) => {
     }
     const deleteFeedbackData = async (id) => {
         try {
-            const response = await fetch(`/feedback/${id}`, {method: "DELETE"})
+            const response = await fetch(`${baseApiUrl}/feedback/${id}`, {method: "DELETE"})
             if(!response.ok) {
                 throw new Error(response.statusText)
             }
@@ -37,7 +40,7 @@ export const FeedbackProvider = ({children}) => {
     }
     const insertFeedbackData = async(feedbackItem) => {
         try {
-            const response = await fetch("/feedback", {
+            const response = await fetch(baseApiUrl+"/feedback", {
                 method: "POST",
                 headers: {"Content-type": "Application/json"},
                 body: JSON.stringify(feedbackItem)
@@ -53,7 +56,7 @@ export const FeedbackProvider = ({children}) => {
     }
     const updateFeedbackData = async (feedbackItem) => {
         try {
-            const response = await fetch(`/feedback/${editFeedbackData.item.id}`, {
+            const response = await fetch(`${baseApiUrl}/feedback/${editFeedbackData.item.id}`, {
                 method: "PUT",
                 headers: {"Content-type": "Application/json"},
                 body: JSON.stringify(feedbackItem)

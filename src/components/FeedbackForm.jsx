@@ -12,7 +12,6 @@ function FeedbackForm() {
             setData({review: editFeedbackData.item.text, message: "", isDisabled: false, rating: String(editFeedbackData.item.rating)})
         }
     }, [editFeedbackData])
-    console.log(data);
     function handleInput(event) {
         const {name, value} = event.target;
         setData(prevData => ({
